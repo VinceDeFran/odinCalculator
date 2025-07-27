@@ -3,60 +3,84 @@ Foundations Course, Calculator Project
 
 REQUIREMENT
 
-Calculator SHALL be developed with a javascript file, an HTML file, and a CSS file.
-
 Calculator SHALL NOT use the built-in javascript eval() function.
 
-Calculator SHALL NOT use solutions that return a new Function() that evaluates a string.
+
+Calculator SHALL NOT use solutions that return a new function() that evaluates a string.
+
 
 Calculator SHALL have the following math functions: ADD, SUBTRACT, MULTIPLY, DIVIDE.
 
+
 Calculator SHALL have an OPERATE function that takes two numbers and then calls one of the math functions to generate a RESULT.
+
 
 Calculator operations SHALL consist of a number (NumberOne), an operator, and another number (NumberTwo). For example, 3 + 5. 
 
+
 Calculator SHALL have dedicated variables for NumberOne, Operator, NumberTwo, and RESULT.  
 
-Calculator SHALL have an HTML GUI with buttons for each digit, operator, a decimal point, and an "eguals"(=).
+
+Calculator SHALL have an HTML GUI with buttons for each digit, each Operator, a decimal point, and an "eguals"(=).
+
 
 Calculator SHALL have a DISPLAY window in the HTML GUI that can hold twenty digits and a decimal point.
 
+
 Calculator SHALL have an equalsButton Event Listener that activates the OPERATE function.
 
-Calculator SHALL track the number of operator (math function) buttons that have been pressed since the last result.
 
-Calculator SHALL activate the OPERATE function if a second operator button is pressed.
+Calculator SHALL track the number of Operator (math function) buttons that have been pressed since the last result.
 
-Calculator SHALL reset the operator tracking to zero before exiting the OPERATE function.
 
-Calcultor SHALL have a CLEAR fuction that resets the RESULT to zero.
+Calculator SHALL activate the OPERATE function if a second Operator button is pressed after NumberTwo.
 
-The DISPLAY SHALL indicate the RESULT at all times with the decimal places rounded off to fit the window.
 
-The DISPLAY SHALL indicate "ERROR" if the RESULT is to large to fit in the DISPLAY.
+Calculator SHALL reset the Operator tracking to zero before exiting the OPERATE function.
+
+
+Calculator SHALL have a CLEAR function that resets the RESULT to zero.
+
+
+The DISPLAY SHALL indicate the RESULT at all times with the decimal places rounded off to fit the twenty allotted digits.
+
+
+The DISPLAY SHALL indicate "ERROR" if the RESULT is to large to fit in the twenty allotted digits.
+
 
 The DISPLAY SHALL indicate "ERROR" if an operator is entered before a new number is entered.
 
-The DISPLAY SHALL indicate "ERROR" if more than one decimal point is entered for either number one or number two.
 
-The DISPLAY SHALL indicate "ERROR" if the "equals" button is press before the first number, the operator, and the second number have been entered.
+The DISPLAY SHALL indicate "ERROR" if the "equals" button is pressed before the NumberOne , the Operator, and NumberTwo have been entered.
 
-Calculator SHALL have a EQUATION sub-display on a second line of the DISPLAY window that indicates the numbers, operator, and "equals" as they are entered.
+
+Calculator SHALL have an EQUATION sub-display on a second line of the DISPLAY window that indicates the numbers, operator, and "equals" as they are entered.
+
 
 The EQUATION sub-display SHALL reset to an empty string when the CLEAR function is called.
 
+
 The EQUATION sub-display SHALL reset to an empty string before displaying a new number that is entered after the last OPERATE.
 
-the RESULT as the first set of digits if a second operator is pressed before the "equals" button.
+
+The EQUATION sub-display SHALL use the RESULT as the first set of digits if a second operator is pressed after NumberTwo instead of the "equals" button.
+
 
 The EQUATION sub-display SHALL be of a smaller font in order to accept up to twenty digits each for the two numbers, and also the operator and the equals symbols.
 
-The DISPLAY SHALL indicate "DIVIDE BY ZERO ERROR" if more than twenty digits are entered for either number in the OPERATE function.
 
-The DISPLAY SHALL indicate "ERROR" if the operator is DIVIDE and the second number is zero.
+The DISPLAY SHALL indicate "ERROR" if more than twenty digits are entered for either number in the OPERATE function.
+
+
+The DISPLAY SHALL indicate "DIVIDE BY ZERO ERROR" if the operator is DIVIDE and the NumberTwo is zero.
+
 
 Calculator SHALL ignore multiple consecutive operator button presses.
 
+
 Calculator SHALL ignore multiple consecutive decimal point button presses.
+
+
+Calculator SHALL ignore multiple consecutive equals button presses.
 
 
