@@ -3,22 +3,22 @@ Foundations Course, Calculator Project
 
 REQUIREMENT
 
-Calculator SHALL NOT use the built-in javascript eval() function.
+DONE        Calculator SHALL NOT use the built-in javascript eval() function.
 
 
-Calculator SHALL NOT use solutions that return a new function() that evaluates a string.
+DONE        Calculator SHALL NOT use solutions that return a new function() that evaluates a string.
 
 
-Calculator SHALL have the following math functions: ADD, SUBTRACT, MULTIPLY, DIVIDE.
+DONE        Calculator SHALL have the following math functions: ADD, SUBTRACT, MULTIPLY, DIVIDE.
 
 
-Calculator SHALL have an OPERATE function that takes two numbers and then calls one of the math functions to generate a RESULT.
+DONE        Calculator SHALL have an OPERATE function that takes two numbers and then calls one of the math functions to generate a RESULT.
 
 
-Calculator operations SHALL consist of a number (NumberOne), an operator, and another number (NumberTwo). For example, 3 + 5. 
+DONE        Calculator operations SHALL consist of a number (NumberOne), an operator, and another number (NumberTwo). For example, 3 + 5. 
 
 
-Calculator SHALL have dedicated variables for NumberOne, Operator, NumberTwo, and RESULT.  
+DONE        Calculator SHALL have dedicated variables for NumberOne, Operator, NumberTwo, and RESULT.  
 
 
 Calculator SHALL have an HTML GUI with buttons for each digit, each Operator, a decimal point, and an "eguals"(=).
@@ -30,13 +30,13 @@ Calculator SHALL have a DISPLAY window in the HTML GUI that can hold twenty digi
 Calculator SHALL have an equalsButton Event Listener that activates the OPERATE function.
 
 
-Calculator SHALL track the number of Operator (math function) buttons that have been pressed since the last result.
+DONE        Calculator SHALL track the number of Operator (math function) buttons that have been pressed since the last result.
 
 
 Calculator SHALL activate the OPERATE function if a second Operator button is pressed after NumberTwo.
 
 
-Calculator SHALL reset the Operator tracking to zero before exiting the OPERATE function.
+DONE        Calculator SHALL reset the Operator tracking to zero before exiting the OPERATE function.
 
 
 Calculator SHALL have a CLEAR function that resets the RESULT to zero.
