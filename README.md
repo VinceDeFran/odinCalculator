@@ -21,10 +21,10 @@ DONE        Calculator operations SHALL consist of a number (NumberOne), an oper
 DONE        Calculator SHALL have dedicated variables for NumberOne, Operator, NumberTwo, and RESULT.  
 
 
-Calculator SHALL have an HTML GUI with buttons for each digit, each Operator, a decimal point, and an "eguals"(=).
+DONE        Calculator SHALL have an HTML GUI with buttons for each digit, each Operator, a decimal point, and an "eguals"(=).
 
 
-Calculator SHALL have a DISPLAY window in the HTML GUI that can hold twenty digits and a decimal point.
+DONE        Calculator SHALL have a DISPLAY window in the HTML GUI that can hold twenty digits and a decimal point.
 
 
 Calculator SHALL have an equalsButton Event Listener that activates the OPERATE function.
@@ -66,7 +66,7 @@ The EQUATION sub-display SHALL reset to an empty string before displaying a new 
 The EQUATION sub-display SHALL use the RESULT as the first set of digits if a second operator is pressed after NumberTwo instead of the "equals" button.
 
 
-The EQUATION sub-display SHALL be of a smaller font in order to accept up to twenty digits each for the two numbers, and also the operator and the equals symbols.
+DONE        The EQUATION sub-display SHALL be of a smaller font in order to accept up to twenty digits each for the two numbers, and also the operator and the equals symbols.
 
 
 The DISPLAY SHALL indicate "ERROR" if more than twenty digits are entered for either number in the OPERATE function.

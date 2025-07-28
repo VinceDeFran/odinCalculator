@@ -3,24 +3,64 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Holy Grail</title>
+    <title>Web Calculator</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="header">
-      TOP
+      WEB PAGE CALCULATOR
     </div>
     <div class="mainflex">
       <div class="leftside">
       </div>
-      <div class="container1">
-        <div class="item1">THING</div>
+      <div class="container1"> 
+
+
+        <div class="calculator">
+          <div class="display">
+            <div class="equation" id="equation">123000000 + 4567890.0123456789 =</div>
+            <div class="result" id="display">1234567890.0123456789</div>
+          </div>
+          <div class="buttons">
+            <!-- Row 1: C (left half) and Backspace (right half) -->
+            <button id="clear" class="btn operator half-width-left">C</button>
+            <button id="backspace" class="btn operator half-width-right" title="Backspace">⇦</button>
+            
+            <!-- Row 2: 7,8,9,+ -->
+            <button class="btn digit" data-digit="7">7</button>
+            <button class="btn digit" data-digit="8">8</button>
+            <button class="btn digit" data-digit="9">9</button>
+            <button class="btn operator" data-operator="+">+</button>
+            
+            <!-- Row 3: 4,5,6,- -->
+            <button class="btn digit" data-digit="4">4</button>
+            <button class="btn digit" data-digit="5">5</button>
+            <button class="btn digit" data-digit="6">6</button>
+            <button class="btn operator" data-operator="-">−</button>
+            
+            <!-- Row 4: 1,2,3,* -->
+            <button class="btn digit" data-digit="1">1</button>
+            <button class="btn digit" data-digit="2">2</button>
+            <button class="btn digit" data-digit="3">3</button>
+            <button class="btn operator" data-operator="*">×</button>
+            
+            <!-- Row 5: 0, ., =, / -->
+            <button class="btn digit" data-digit="0">0</button>
+            <button class="btn decimal" id="decimal">.</button>
+            <button class="btn equals" id="equals">=</button>
+            <button class="btn operator" data-operator="/">÷</button>
+          </div>
+        </div>
+
+        
       </div>
+
+
       <div class="rightside">
       </div>
     </div>
     <div class="footer">
-      BOTTOM
+      Nothing to see down here
     </div>
   </body>
   <script src="javaScript.js"></script>
