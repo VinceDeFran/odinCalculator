@@ -85,11 +85,224 @@ function OPERATE(n1, n2, op) {
 
   return resStr;
 }
-console.log('OPERATE(10,5, "+")');
-console.log(OPERATE(10,5, "+"));
-console.log('OPERATE(10,5, "-")');
-console.log(OPERATE(10,5, "-"));
-console.log('OPERATE(10,5, "*")');
-console.log(OPERATE(10,5, "*"));
-console.log('OPERATE(10,5, "/")');
-console.log(OPERATE(10,5, "/"));
+
+
+
+// Display Variables
+const display = document.getElementById('display');
+const equationDisplay = document.getElementById('equation');
+const MAX_DIGITS = 20; // Max digits allowed per number (20)
+
+
+// Clear all
+function CLEAR() {
+  NumberOne = '';
+  NumberTwo = '';
+  Operator = null;
+  RESULT = null;
+  operatorCount = 0;
+  updateDisplay('0');
+  updateEquation('');
+}
+
+
+//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\DISPLAY FUNCTIONS
+// DISPLAY FUNCTIONS 
+
+// Update the main display with the current value
+function updateDisplay(value) {
+  display.textContent = value;
+}
+
+// Update the equation sub-display
+function updateEquation(value) {
+  equationDisplay.textContent = value;
+}
+
+// Append digit to current number
+function appendDigit(digit) {
+  // If last operation was complete and user starts typing a new number, reset equation sub-display
+  if (RESULT !== null && Operator === null) {
+    // Starting new equation
+    CLEAR();
+  }
+
+  if (!Operator) {
+    // Working on NumberOne
+    if (NumberOne.length >= MAX_DIGITS) {
+      displayError();
+      return;
+    }
+    NumberOne += digit;
+
+    if (countDecimals(NumberOne) > 1) {
+      displayError();
+      return;
+    }
+    updateDisplay(NumberOne);
+    updateEquation(NumberOne);
+  } else {
+    // Working on NumberTwo
+    if (NumberTwo.length >= MAX_DIGITS) {
+      displayError();
+      return;
+    }
+    NumberTwo += digit;
+
+    if (countDecimals(NumberTwo) > 1) {
+      displayError();
+      return;
+    }
+
+    updateDisplay(NumberTwo);
+    updateEquation(`${NumberOne} ${Operator} ${NumberTwo}`);
+  }
+}
+ 
+
+// Count decimals in a number string
+function countDecimals(numStr) {
+  return (numStr.split('.').length - 1);
+}
+////////////////////////////////////////////////////////////////////
+
+
+// EVENT LISTENERS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+// Event Listeners Setup
+function setupListeners() {
+  // Digits
+  document.querySelectorAll('.btn.digit').forEach(button => {
+    button.addEventListener('click', () => {
+      appendDigit(button.dataset.digit);
+    });
+  });
+
+  // Operators
+  document.querySelectorAll('.btn.operator').forEach(button => {
+    if (button.id === 'clear') {
+      button.addEventListener('click', () => {
+        CLEAR();
+      });
+    }  else {
+      button.addEventListener('click', () => {
+        handleOperator(button.dataset.operator);
+      });
+    }
+  });
+
+  // Decimal
+  const decimalButton = document.getElementById('decimal');
+
+
+  // Equals
+  const equalsButton = document.getElementById('equals');
+
+  equalsButton.addEventListener('click', () => {
+    handleEquals();
+  });
+}
+
+
+// Handle operator input
+function handleOperator(op) {
+  // Ignore if no NumberOne yet, or display error if operator pressed before a new number is entered
+  if (NumberOne === '') {
+    displayError();
+    return;
+  }
+
+  // Ignore multiple consecutive operator presses
+  if (operatorCount > 0 && !NumberTwo) {
+    return;
+  }
+
+  // If NumberTwo exists, perform intermediate calculation before continuing
+  if (Operator && NumberTwo) {
+    // Calculate RESULT
+    let res = OPERATE(NumberOne, NumberTwo, Operator);
+    if (res === 'ERROR' || res === 'DIVIDE BY ZERO ERROR') {
+      displayError(res);
+      return;
+    }
+    RESULT = res;
+    NumberOne = RESULT;
+    NumberTwo = '';
+    Operator = op;
+
+    updateDisplay(RESULT);
+    // Update equation sub-display using RESULT as first number (not equal sign yet)
+    updateEquation(`${RESULT} ${Operator}`);
+
+  } else {
+    Operator = op;
+    updateEquation(`${NumberOne} ${Operator}`);
+  }
+
+  operatorCount++;
+}
+
+
+// Handle equals button press
+function handleEquals() {
+  // Ignore multiple equals presses in a row
+  if (RESULT !== null && !NumberTwo && !Operator) {
+    return;
+  }
+
+  if (NumberOne === '' || Operator === null || NumberTwo === '') {
+    displayError();
+    return;
+  }
+
+  // Check for multiple decimals for both numbers
+  if (countDecimals(NumberOne) > 1 || countDecimals(NumberTwo) > 1) {
+    displayError();
+    return;
+  }
+
+  // Check digit length limits for input numbers
+  if (NumberOne.replace('.', '').length > MAX_DIGITS || NumberTwo.replace('.', '').length > MAX_DIGITS) {
+    displayError();
+    return;
+  }
+
+  let res = OPERATE(NumberOne, NumberTwo, Operator);
+
+  if (res === 'ERROR' || res === 'DIVIDE BY ZERO ERROR') {
+    displayError(res);
+    return;
+  }
+
+  RESULT = res;
+  updateDisplay(RESULT);
+  updateEquation(`${NumberOne} ${Operator} ${NumberTwo} =`);
+  
+  // After equals, prepare for next input by resetting Operator and NumberTwo
+  NumberOne = RESULT.toString();
+  NumberTwo = '';
+  Operator = null;
+  operatorCount = 0;
+}
+
+
+// Generic display error handler
+function displayError(message='ERROR') {
+  RESULT = null;
+  NumberOne = '';
+  NumberTwo = '';
+  Operator = null;
+  operatorCount = 0;
+  updateDisplay(message);
+  updateEquation('');
+}
+
+// Initialize calculator
+function init() {
+  CLEAR();
+  setupListeners();
+}
+
+init();
+
+  ////////////////////////////////////////////////////////////////////////
