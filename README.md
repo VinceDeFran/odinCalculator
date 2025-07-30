@@ -78,15 +78,15 @@ DONE        The DISPLAY SHALL indicate "DIVIDE BY ZERO ERROR" if the operator is
 DONE        Calculator SHALL ignore multiple consecutive operator button presses.
 
 
-Calculator SHALL ignore multiple consecutive decimal point button presses.
+DONE        Calculator SHALL ignore multiple consecutive decimal point button presses.
 
 
 DONE        Calculator SHALL ignore multiple consecutive equals button presses.
 
 
-Calculator SHALL have a backspace button.
+DONE        Calculator SHALL have a backspace button.
 
 
-Calculator SHALL remove one digit per each backspace button push during either NumberOne or NumberTwo entry. 
+DONE        Calculator SHALL remove one digit per each backspace button push during either NumberOne or NumberTwo entry. 
 
 

@@ -106,8 +106,7 @@ function CLEAR() {
 }
 
 
-//\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\DISPLAY FUNCTIONS
-// DISPLAY FUNCTIONS 
+//  DISPLAY FUNCTIONS  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 // Update the main display with the current value
 function updateDisplay(value) {
@@ -164,7 +163,7 @@ function appendDigit(digit) {
 function countDecimals(numStr) {
   return (numStr.split('.').length - 1);
 }
-////////////////////////////////////////////////////////////////////
+//  DISPLAY FUNCTIONS  //////////////////////////////////////////////////////////////////
 
 
 // EVENT LISTENERS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -184,15 +183,16 @@ function setupListeners() {
       button.addEventListener('click', () => {
         CLEAR();
       });
-    }  else {
+    }  else if (button.id === 'backspace') {
+      button.addEventListener('click', () => {
+        handleBackspace();
+      });
+    }else {
       button.addEventListener('click', () => {
         handleOperator(button.dataset.operator);
       });
     }
   });
-
-  // Decimal
-  const decimalButton = document.getElementById('decimal');
 
 
   // Equals
@@ -202,6 +202,7 @@ function setupListeners() {
     handleEquals();
   });
 }
+// EVENT LISTENERS //////////////////////////////////////////////////
 
 
 // Handle operator input
@@ -297,6 +298,81 @@ function displayError(message='ERROR') {
   updateEquation('');
 }
 
+// DECIMAL POINT \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+  const decimalButton = document.getElementById('decimal');
+
+  decimalButton.addEventListener('click', () => {
+    appendDecimal();
+  });
+  
+// Handle decimal point input
+function appendDecimal() {
+  // Prevent multiple decimals consecutively also
+  let currentNumber = Operator ? NumberTwo : NumberOne;
+
+  if (currentNumber.includes('.')) {
+    // ignore multiple decimals in same number
+    return;
+  }
+
+  if (RESULT !== null && Operator === null) {
+    // New input after result means clear
+    CLEAR();
+  }
+
+  if (!Operator) {
+    NumberOne = currentNumber === '' ? '0.' : currentNumber + '.';
+    updateDisplay(NumberOne);
+    updateEquation(NumberOne);
+  } else {
+    NumberTwo = currentNumber === '' ? '0.' : currentNumber + '.';
+    updateDisplay(NumberTwo);
+    updateEquation(`${NumberOne} ${Operator} ${NumberTwo}`);
+  }
+}
+//  DECIMAL POINT ////////////////////////////////////////////////// */
+
+
+// BACKSPACE FUNCTION  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+function handleBackspace() {
+  // Backspace only affects the current number digits and decimal point
+
+  // If RESULT is just shown and no Operator is set, start fresh
+  if (RESULT !== null && Operator === null) {
+    CLEAR();
+    return;
+  }
+
+  if (Operator === null) {
+    // Editing NumberOne
+    if (NumberOne.length > 0) {
+      NumberOne = NumberOne.slice(0, -1);
+      if (NumberOne === '') {
+        updateDisplay('0');
+        updateEquation('');
+      } else {
+        updateDisplay(NumberOne);
+        updateEquation(NumberOne);
+      }
+    }
+  } else {
+    // Editing NumberTwo if it exists
+    if (NumberTwo.length > 0) {
+      NumberTwo = NumberTwo.slice(0, -1);
+      if (NumberTwo === '') {
+        updateDisplay('0');
+        updateEquation(`${NumberOne} ${Operator}`);
+      } else {
+        updateDisplay(NumberTwo);
+        updateEquation(`${NumberOne} ${Operator} ${NumberTwo}`);
+      }
+    }
+  }
+}
+// BACKSPACE FUNCTION  //////////////////////////////////////////////////
+
+
 // Initialize calculator
 function init() {
   CLEAR();
@@ -305,4 +381,4 @@ function init() {
 
 init();
 
-  ////////////////////////////////////////////////////////////////////////
+  //  EOF
